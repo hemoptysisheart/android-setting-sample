@@ -4,11 +4,11 @@ package com.github.hemoptysisheart.settingsample.domain
  * OIDC 인증 정보.
  */
 interface OidcSetting {
-    var refreshToken: String
+    val refreshToken: String?
 
-    var accessToken: String?
+    val accessToken: String?
 
-    var idToken: String?
+    val idToken: String?
 
     suspend fun refresh()
 }

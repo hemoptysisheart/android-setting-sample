@@ -18,11 +18,11 @@ class SettingSampleApplication : Application() {
     lateinit var settings: Settings
 
     override fun onCreate() {
-        Log.i(TAG, "#onCreate start bootstrap.")
         super.onCreate()
 
         MainScope().launch {
-            Log.i(TAG, "#onCreate : settings=$settings∂")
+            Log.i(TAG, "#onCreate start bootstrap.")
+            settings.oidc.refresh()
         }
     }
 }

@@ -10,10 +10,12 @@ class SettingsModel(
     private val sharedPreferences: SharedPreferences,
     private val editor: SharedPreferences.Editor = sharedPreferences.edit()
 ) : Settings {
-    override val oidc: OidcSetting?
-        get() = TODO("Not yet implemented")
+    override val oidc: OidcSetting
+        get() = OidcSettingModel(sharedPreferences, editor)
+
     override val group1: SettingGroup1
         get() = TODO("Not yet implemented")
+
     override val group2: SettingGroup2
         get() = TODO("Not yet implemented")
 }
