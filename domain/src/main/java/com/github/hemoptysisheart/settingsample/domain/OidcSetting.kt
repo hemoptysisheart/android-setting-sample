@@ -9,4 +9,6 @@ interface OidcSetting {
     var accessToken: String?
 
     var idToken: String?
+
+    suspend fun refresh()
 }
