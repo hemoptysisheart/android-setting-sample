@@ -1,4 +1,4 @@
-package com.github.hemoptysisheart.settingsample.ui.theme
+package com.github.hemoptysisheart.settingsample.app.ui.theme
 
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.material.MaterialTheme
