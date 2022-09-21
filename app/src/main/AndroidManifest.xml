@@ -21,5 +21,10 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name=".app.activity.OidcActivity"
+            android:exported="false"
+            android:label="@string/activity_oidc_title"
+            android:theme="@style/Theme.SettingSample" />
     </application>
 </manifest>

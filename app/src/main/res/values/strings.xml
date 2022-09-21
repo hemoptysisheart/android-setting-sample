@@ -1,3 +1,9 @@
 <resources>
-    <string name="app_name">SettingSample</string>
+    <string name="app_name">Setting Sample</string>
+    <string name="activity_oidc_title">OidcActivity</string>
+
+    <string name="setting_group_auth_label">인증</string>
+    <string name="setting_item_oidc_label">OIDC</string>
+    <string name="setting_item_oidc_status_anonymous">미인증</string>
+    <string name="setting_item_oidc_status_authorized">인증</string>
 </resources>
