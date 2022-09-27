@@ -1,16 +1,20 @@
 package com.github.hemoptysisheart.settingsample.app.ui.component
 
 import android.util.Log
+import androidx.compose.foundation.clickable
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.material.Button
+import androidx.compose.foundation.layout.padding
 import androidx.compose.material.Icon
 import androidx.compose.material.Text
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Settings
+import androidx.compose.material.icons.filled.KeyboardArrowRight
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.dp
 
 private const val TAG = "SettingItemHasDetail"
 
@@ -19,22 +23,26 @@ private const val TAG = "SettingItemHasDetail"
  */
 @Composable
 fun SettingItemHasDetail(
-    itemName: String = "Setting item name",
+    itemName: String,
     summary: String? = null,
     onClick: () -> Unit = { Log.v(TAG, "#onClick") }
 ) {
-    Button(modifier = Modifier.fillMaxWidth(), onClick = onClick) {
+    Row(modifier = Modifier
+        .fillMaxWidth()
+        .padding(6.dp)
+        .clickable { onClick() }
+    ) {
         Text(itemName)
         Spacer(Modifier.weight(1.0F))
         if (null != summary) {
-            Text(summary)
+            Text(text = summary, color = Color.Gray)
         }
-        Icon(Icons.Default.Settings, "")
+        Icon(Icons.Default.KeyboardArrowRight, "detail", tint = Color.Gray)
     }
 }
 
 @Composable
 @Preview
 fun SettingItemHasDetailPreview() {
-    SettingItemHasDetail()
+    SettingItemHasDetail("Setting item name", "summary")
 }

@@ -7,18 +7,18 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 
 @HiltViewModel
-class OidcSettingMenuGroupViewModel @Inject constructor(
+class OidcSettingViewModel @Inject constructor(
+    private val settings: Settings
 ) : ViewModel() {
     companion object {
-        val TAG = OidcSettingMenuGroupViewModel::class.simpleName
+        val TAG = OidcSettingViewModel::class.simpleName
     }
 
-    /**
-     * DI only.
-     */
-    lateinit var settings: Settings
     val oidc: OidcSetting
         get() = settings.oidc
 
-    override fun toString() = "$TAG(oidc=$oidc)"
+    val status: Boolean
+        get() = null != oidc.refreshToken
+
+    override fun toString() = "$TAG(status=$status)"
 }

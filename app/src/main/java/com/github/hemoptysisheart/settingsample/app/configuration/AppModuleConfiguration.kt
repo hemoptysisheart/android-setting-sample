@@ -39,7 +39,7 @@ class AppModuleConfiguration {
     }
 
     @Provides
-    fun provideSettingsModel(sharedPreferences: SharedPreferences): Settings {
+    fun provideSettings(sharedPreferences: SharedPreferences): Settings {
         val model = SettingsModel(sharedPreferences)
         Log.i(TAG, "#provideSettingModel return : $model")
         return model
