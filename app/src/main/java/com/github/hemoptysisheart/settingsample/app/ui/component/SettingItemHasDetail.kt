@@ -15,6 +15,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import com.github.hemoptysisheart.settingsample.app.ui.theme.SettingSampleTheme
 
 private const val TAG = "SettingItemHasDetail"
 
@@ -44,5 +45,7 @@ fun SettingItemHasDetail(
 @Composable
 @Preview
 fun SettingItemHasDetailPreview() {
-    SettingItemHasDetail("Setting item name", "summary")
+    SettingSampleTheme {
+        SettingItemHasDetail("Setting item name", "summary")
+    }
 }

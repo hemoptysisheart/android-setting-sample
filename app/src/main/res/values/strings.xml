@@ -4,6 +4,13 @@
 
     <string name="setting_group_auth_label">인증</string>
     <string name="setting_item_oidc_label">OIDC</string>
-    <string name="setting_item_oidc_status_anonymous">미인증</string>
-    <string name="setting_item_oidc_status_authorized">인증</string>
+    <string name="setting_item_oidc_status_anonymous">게스트</string>
+    <string name="setting_item_oidc_status_authorized">유저</string>
+    <string name="label_oidc_refresh_token">Refresh Token</string>
+    <string name="label_oidc_access_token">Access Token</string>
+    <string name="label_oidc_id_token">ID Token</string>
+    <string name="label_oidc_auth">로그인</string>
+    <string name="label_oidc_refresh">갱신</string>
+    <string name="label_oidc_clear">로그아웃</string>
+    <string name="label_null">null</string>
 </resources>

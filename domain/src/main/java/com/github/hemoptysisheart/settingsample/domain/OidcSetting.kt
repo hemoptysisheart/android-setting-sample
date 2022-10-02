@@ -10,5 +10,7 @@ interface OidcSetting {
 
     val idToken: String?
 
+    suspend fun authorize()
+
     suspend fun refresh()
 }

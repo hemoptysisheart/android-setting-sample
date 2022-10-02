@@ -19,13 +19,14 @@ import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.github.hemoptysisheart.settingsample.R.string.*
 import com.github.hemoptysisheart.settingsample.app.activity.OidcActivity
+import com.github.hemoptysisheart.settingsample.app.ui.theme.SettingSampleTheme
 import com.github.hemoptysisheart.settingsample.app.viewmodel.OidcSettingViewModel
 import com.github.hemoptysisheart.settingsample.domain.DummySettings
 
 @Composable
 fun OidcSettingMenuGroup(viewModel: OidcSettingViewModel = viewModel()) {
     val context = LocalContext.current
-    val status by remember { mutableStateOf(viewModel.status) }
+    val setting by remember { mutableStateOf(viewModel) }
 
     Column(Modifier.fillMaxWidth()) {
         Text(
@@ -37,7 +38,7 @@ fun OidcSettingMenuGroup(viewModel: OidcSettingViewModel = viewModel()) {
         )
         SettingItemHasDetail(
             stringResource(setting_item_oidc_label),
-            if (status) {
+            if (setting.status) {
                 stringResource(setting_item_oidc_status_authorized)
             } else {
                 stringResource(setting_item_oidc_status_anonymous)
@@ -51,6 +52,7 @@ fun OidcSettingMenuGroup(viewModel: OidcSettingViewModel = viewModel()) {
 @Composable
 @Preview
 fun OidcSettingMenuGroupLayout() {
-    val viewModel = OidcSettingViewModel(DummySettings)
-    OidcSettingMenuGroup(viewModel)
+    SettingSampleTheme {
+        OidcSettingMenuGroup(OidcSettingViewModel(DummySettings))
+    }
 }

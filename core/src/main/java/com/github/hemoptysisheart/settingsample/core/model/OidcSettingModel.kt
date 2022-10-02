@@ -4,7 +4,7 @@ import android.content.SharedPreferences
 import android.util.Log
 import com.github.hemoptysisheart.settingsample.domain.OidcSetting
 import kotlinx.coroutines.delay
-import java.util.*
+import java.util.UUID.randomUUID
 
 class OidcSettingModel(
     private val sharedPreferences: SharedPreferences,
@@ -35,6 +35,13 @@ class OidcSettingModel(
     override var idToken: String? = null
         private set
 
+    override suspend fun authorize() {
+        refreshToken = "refresh-${randomUUID()}"
+        accessToken = "access-${randomUUID()}"
+        idToken = "id-${randomUUID()}"
+        Log.v(TAG, "#authorize : refreshToken=$refreshToken, accessToken=$accessToken, idToken=$idToken")
+    }
+
     override suspend fun refresh() {
         if (null == refreshToken) {
             Log.i(TAG, "#refresh no oidc authorization.")
@@ -43,9 +50,9 @@ class OidcSettingModel(
 
         Log.d(TAG, "#refresh dummy refresh delay start.")
         delay(3_000L)
-        accessToken = "${UUID.randomUUID()}"
-        idToken = "${UUID.randomUUID()}"
-        Log.d(TAG, "#refresh dummy refresh delay complete.")
+        accessToken = "${randomUUID()}"
+        idToken = "${randomUUID()}"
+        Log.v(TAG, "#refresh : refreshToken=$refreshToken, accessToken=$accessToken, idToken=$idToken")
     }
 
     override fun toString() =
