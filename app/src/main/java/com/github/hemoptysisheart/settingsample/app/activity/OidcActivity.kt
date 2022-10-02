@@ -11,11 +11,9 @@ import androidx.compose.material.Surface
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
+import androidx.compose.runtime.produceState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color.Companion.LightGray
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -49,7 +47,9 @@ private const val TAG = "OidcLayout"
 
 @Composable
 fun OidcLayout(viewModel: OidcSettingViewModel = viewModel()) {
-    val setting by remember { mutableStateOf(viewModel) }
+    val refreshToken by produceState(null) { viewModel.refreshToken }
+    val accessToken by produceState(null) { viewModel.accessToken }
+    val idToken by produceState(null) { viewModel.idToken }
     Column(
         modifier = Modifier.fillMaxWidth(),
         verticalArrangement = Arrangement.Center,
@@ -61,13 +61,7 @@ fun OidcLayout(viewModel: OidcSettingViewModel = viewModel()) {
                 .padding(8.dp)
         ) {
             Text(text = stringResource(string.label_oidc_refresh_token), modifier = Modifier.weight(0.35F))
-            setting.refreshToken?.also {
-                Text(text = it, modifier = Modifier.weight(0.65F))
-            } ?: Text(
-                text = stringResource(string.label_null),
-                modifier = Modifier.weight(0.65F),
-                color = LightGray
-            )
+            Text(text = refreshToken ?: "", modifier = Modifier.weight(0.65F))
         }
         Row(
             Modifier
@@ -75,9 +69,7 @@ fun OidcLayout(viewModel: OidcSettingViewModel = viewModel()) {
                 .padding(8.dp)
         ) {
             Text(text = stringResource(string.label_oidc_access_token), modifier = Modifier.weight(0.35F))
-            setting.accessToken?.also {
-                Text(text = it, modifier = Modifier.weight(0.65F))
-            } ?: Text(text = stringResource(string.label_null), modifier = Modifier.weight(0.65F), color = LightGray)
+            Text(text = accessToken ?: "", modifier = Modifier.weight(0.65F))
         }
         Row(
             Modifier
@@ -85,11 +77,9 @@ fun OidcLayout(viewModel: OidcSettingViewModel = viewModel()) {
                 .padding(8.dp)
         ) {
             Text(text = stringResource(string.label_oidc_id_token), modifier = Modifier.weight(0.35F))
-            setting.idToken?.also {
-                Text(text = it, modifier = Modifier.weight(0.65F))
-            } ?: Text(text = stringResource(string.label_null), modifier = Modifier.weight(0.65F), color = LightGray)
+            Text(text = idToken ?: "", modifier = Modifier.weight(0.65F))
         }
-        if (setting.status) {
+        if (viewModel.status) {
             Button(onClick = {
                 viewModel.refresh()
                 Log.v(TAG, "#refresh.onCLick : viewModel=$viewModel")
