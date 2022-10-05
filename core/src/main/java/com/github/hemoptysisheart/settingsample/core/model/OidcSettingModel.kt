@@ -4,6 +4,7 @@ import android.content.SharedPreferences
 import android.util.Log
 import com.github.hemoptysisheart.settingsample.domain.OidcSetting
 import com.github.hemoptysisheart.settingsample.domain.OidcStatus
+import com.github.hemoptysisheart.settingsample.domain.OidcStatus.*
 import kotlinx.coroutines.delay
 import java.util.UUID.randomUUID
 
@@ -19,7 +20,7 @@ class OidcSettingModel(
         const val KEY_REFRESH_TOKEN = "$KEY_PREFIX#refreshToken"
     }
 
-    override var status: OidcStatus = OidcStatus.ANONYMOUS
+    override var status: OidcStatus = if (null == refreshToken) ANONYMOUS else AUTHORIZED
         private set
 
     override var refreshToken: String?
@@ -40,13 +41,13 @@ class OidcSettingModel(
         private set
 
     override suspend fun authorize() {
-        status = OidcStatus.AUTHORIZING
+        status = AUTHORIZING
         delay(5_000L)
         refreshToken = "refresh-${randomUUID()}"
         accessToken = "access-${randomUUID()}"
         idToken = "id-${randomUUID()}"
         Log.v(TAG, "#authorize : refreshToken=$refreshToken, accessToken=$accessToken, idToken=$idToken")
-        status = OidcStatus.REFRESHED
+        status = REFRESHED
     }
 
     override suspend fun refresh() {
@@ -56,11 +57,11 @@ class OidcSettingModel(
         }
 
         Log.d(TAG, "#refresh dummy refresh delay start.")
-        status = OidcStatus.REFRESHING
+        status = REFRESHING
         delay(3_000L)
         accessToken = "${randomUUID()}"
         idToken = "${randomUUID()}"
-        status = OidcStatus.REFRESHED
+        status = REFRESHED
         Log.v(TAG, "#refresh : refreshToken=$refreshToken, accessToken=$accessToken, idToken=$idToken")
     }
 

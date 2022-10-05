@@ -10,6 +10,7 @@ import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -19,7 +20,6 @@ import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.github.hemoptysisheart.settingsample.R
 import com.github.hemoptysisheart.settingsample.R.string.domain_oidc_setting_status_label
-import com.github.hemoptysisheart.settingsample.app.ui.component.rememberOidcSettingUiState
 import com.github.hemoptysisheart.settingsample.app.ui.resource.OidcStatusResource
 import com.github.hemoptysisheart.settingsample.app.ui.theme.SettingSampleTheme
 import com.github.hemoptysisheart.settingsample.app.viewmodel.OidcSettingViewModel
@@ -53,7 +53,8 @@ private const val TAG = "OidcLayout"
 fun OidcLayout(viewModel: OidcSettingViewModel = viewModel()) {
     Log.v(TAG, "#OidcLayout args : viewModel=$viewModel")
 
-    val state = rememberOidcSettingUiState()
+    val status = remember { viewModel.status }
+    val refreshToken = remember { viewModel.refreshToken }
 
     Column(
         modifier = Modifier.fillMaxWidth(),
@@ -67,7 +68,7 @@ fun OidcLayout(viewModel: OidcSettingViewModel = viewModel()) {
         ) {
             Text(text = stringResource(domain_oidc_setting_status_label), modifier = Modifier.weight(0.35F))
             Text(
-                text = stringResource(OidcStatusResource[state.status].label),
+                text = stringResource(OidcStatusResource[status].label),
                 modifier = Modifier.weight(0.65F),
                 color = Color.LightGray
             )
@@ -82,15 +83,15 @@ fun OidcLayout(viewModel: OidcSettingViewModel = viewModel()) {
                 modifier = Modifier.weight(0.35F)
             )
             Text(
-                text = state.refreshToken ?: stringResource(id = R.string.label_not_set),
+                text = refreshToken ?: stringResource(id = R.string.label_not_set),
                 modifier = Modifier.weight(0.65F),
                 color = Color.LightGray
             )
         }
 
-        when (state.status) {
+        when (status) {
             ANONYMOUS, AUTHORIZING -> {
-                Button(onClick = { viewModel.authorize() }, enabled = ANONYMOUS == state.status) {
+                Button(onClick = { viewModel.authorize() }, enabled = ANONYMOUS == status) {
                     Text(text = stringResource(id = R.string.action_oidc_authorize))
                 }
             }

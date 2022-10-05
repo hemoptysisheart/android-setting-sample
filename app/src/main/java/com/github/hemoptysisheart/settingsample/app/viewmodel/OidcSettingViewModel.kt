@@ -1,6 +1,9 @@
 package com.github.hemoptysisheart.settingsample.app.viewmodel
 
 import android.util.Log
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.github.hemoptysisheart.settingsample.domain.OidcSetting
@@ -19,12 +22,8 @@ class OidcSettingViewModel @Inject constructor(
 
     private val oidc: OidcSetting = settings.oidc
 
-    var status = oidc.status
-        get() = oidc.status
-        private set
-    var refreshToken = oidc.refreshToken
-        get() = oidc.refreshToken
-        private set
+    var status by mutableStateOf(oidc.status)
+    var refreshToken by mutableStateOf(oidc.refreshToken)
     val accessToken = oidc.accessToken
     val idToken = oidc.idToken
 
@@ -32,6 +31,8 @@ class OidcSettingViewModel @Inject constructor(
         viewModelScope.launch {
             Log.v(TAG, "#authorize start : oidc=$oidc")
             oidc.authorize()
+            status = oidc.status
+            refreshToken = oidc.refreshToken
             Log.v(TAG, "#authorize end : oidc=$oidc")
         }
     }
