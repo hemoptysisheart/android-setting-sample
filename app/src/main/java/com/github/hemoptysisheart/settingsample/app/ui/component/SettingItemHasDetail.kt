@@ -11,10 +11,12 @@ import androidx.compose.material.Text
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.KeyboardArrowRight
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import com.github.hemoptysisheart.settingsample.app.ui.theme.SettingSampleTheme
 
 private const val TAG = "SettingItemHasDetail"
@@ -28,15 +30,17 @@ fun SettingItemHasDetail(
     summary: String? = null,
     onClick: () -> Unit = { Log.v(TAG, "#onClick") }
 ) {
-    Row(modifier = Modifier
-        .fillMaxWidth()
-        .padding(6.dp)
-        .clickable { onClick() }
+    Row(
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(8.dp)
+            .clickable { onClick() },
+        verticalAlignment = Alignment.CenterVertically
     ) {
-        Text(itemName)
+        Text(itemName, Modifier.padding(8.dp), fontSize = 20.sp)
         Spacer(Modifier.weight(1.0F))
         if (null != summary) {
-            Text(text = summary, color = Color.Gray)
+            Text(text = summary, color = Color.Gray, fontSize = 16.sp)
         }
         Icon(Icons.Default.KeyboardArrowRight, "detail", tint = Color.Gray)
     }

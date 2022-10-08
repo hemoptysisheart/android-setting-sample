@@ -12,11 +12,7 @@ object DummyOidcSetting : OidcSetting {
             "eyJpc3MiOiJkdW1teSB0b2tlbiIsImlhdCI6MTY2NDU5NzM1MSwiZXhwIjo0MDk0NTEwOTUxLCJhdWQiOiJodHRwczovL2hlbW9wdHlzaXNoZWFydC5naXRodWIuaW8iLCJzdWIiOiJhYmNkZWZnaGlqa2xtbm9wcXJzdHV2d3h5eiJ9." +
             "Iosns1WHwAy0BUMSDzEbG0iiWo2us5tfmY1scnPbxPw"
 
-    override var status: OidcStatus = OidcStatus.ANONYMOUS
-        private set
-
     override var refreshToken: String? = null
-
     override var accessToken: String? = null
         private set
 
@@ -40,7 +36,7 @@ object DummyOidcSetting : OidcSetting {
         }
     }
 
-    suspend fun clean() {
+    override suspend fun clear() {
         delay(ThreadLocalRandom.current().nextLong(500L, 2000L))
         accessToken = null
         idToken = null

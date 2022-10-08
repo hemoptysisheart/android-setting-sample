@@ -2,29 +2,25 @@
     <string name="app_name">Setting Sample</string>
     <string name="activity_oidc_title">Oidc</string>
 
+    <string name="label_not_set">미설정</string>
+    <string name="label_null">null</string>
+
+    <string name="label_setting_group_auth">인증</string>
+    <string name="label_setting_item_oidc">OIDC</string>
+
     <string name="domain_oidc_setting_status_label">상태</string>
     <string name="domain_oidc_setting_status_anonymous_label">미인증</string>
     <string name="domain_oidc_setting_status_authorizing_label">인증중</string>
     <string name="domain_oidc_setting_status_authorized_label">인증</string>
     <string name="domain_oidc_setting_status_refreshing_label">갱신중</string>
     <string name="domain_oidc_setting_status_refreshed_label">갱신완료</string>
+
     <string name="domain_oidc_setting_refresh_token_label">리프레시 토큰</string>
+    <string name="domain_oidc_setting_access_token_label">액세스 토큰</string>
+    <string name="domain_oidc_setting_id_token_label">ID 토큰</string>
 
     <string name="action_oidc_authorize">인증</string>
-
-    <string name="label_not_set">미설정</string>
-    <string name="label_null">null</string>
-
-    <!-- ========================================================================================================== -->
-
-    <string name="setting_group_auth_label">인증</string>
-    <string name="setting_item_oidc_label">OIDC</string>
-    <string name="setting_item_oidc_status_anonymous">게스트</string>
-    <string name="setting_item_oidc_status_authorized">유저</string>
-    <string name="label_oidc_refresh_token">Refresh Token</string>
-    <string name="label_oidc_access_token">Access Token</string>
-    <string name="label_oidc_id_token">ID Token</string>
-    <string name="label_oidc_auth">로그인</string>
-    <string name="label_oidc_refresh">갱신</string>
-    <string name="label_oidc_clear">로그아웃</string>
+    <string name="action_oidc_refresh">갱신</string>
+    <string name="action_oidc_manual_refresh">갱신 재실행</string>
+    <string name="action_oidc_clear">로그아웃</string>
 </resources>

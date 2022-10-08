@@ -4,21 +4,24 @@ package com.github.hemoptysisheart.settingsample.domain
  * OIDC 인증 정보.
  */
 interface OidcSetting {
-    val status: OidcStatus
-        get() = when {
-            null == DummyOidcSetting.refreshToken -> OidcStatus.ANONYMOUS
-            null != DummyOidcSetting.refreshToken && null == DummyOidcSetting.accessToken && null == DummyOidcSetting.idToken -> OidcStatus.AUTHORIZED
-            null != DummyOidcSetting.refreshToken && null != DummyOidcSetting.accessToken && null != DummyOidcSetting.idToken -> OidcStatus.REFRESHED
-            else -> throw IllegalStateException("refreshToken=${DummyOidcSetting.refreshToken}, accessToken=${DummyOidcSetting.accessToken}, idToken=${DummyOidcSetting.idToken}")
-        }
-
     val refreshToken: String?
 
     val accessToken: String?
 
     val idToken: String?
 
+    /**
+     * OIDC 인증하기.
+     */
     suspend fun authorize()
 
+    /**
+     * OIDC 토큰 재발급.
+     */
     suspend fun refresh()
+
+    /**
+     * OIDC 인증 제거.
+     */
+    suspend fun clear()
 }
