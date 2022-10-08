@@ -69,7 +69,6 @@ fun OidcLayout(viewModel: OidcSettingViewModel = viewModel()) {
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
-        Spacer(modifier = Modifier.weight(0.5F))
         Row(
             Modifier
                 .fillMaxWidth()
@@ -197,7 +196,6 @@ fun OidcLayout(viewModel: OidcSettingViewModel = viewModel()) {
                 fontWeight = FontWeight.Bold
             )
         }
-        Spacer(modifier = Modifier.weight(1.0F))
     }
 }
 
