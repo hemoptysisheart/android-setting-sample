@@ -45,8 +45,6 @@ class OidcSettingViewModel @Inject constructor(
     fun authorize() {
         viewModelScope.launch {
             status.emit(OidcStatus.AUTHORIZING)
-        }
-        viewModelScope.launch {
             Log.v(TAG, "#authorize start : oidc=$oidc")
 
             oidc.authorize()
@@ -60,8 +58,6 @@ class OidcSettingViewModel @Inject constructor(
     fun refresh() {
         viewModelScope.launch {
             status.emit(OidcStatus.REFRESHING)
-        }
-        viewModelScope.launch {
             Log.v(TAG, "#refresh start : oidc=$oidc")
 
             oidc.refresh()
